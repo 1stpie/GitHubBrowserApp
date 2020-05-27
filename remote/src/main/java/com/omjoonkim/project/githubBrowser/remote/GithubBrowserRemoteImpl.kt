@@ -18,17 +18,17 @@ class GithubBrowserRemoteImpl(
 
     override fun getUserInfo(userName: String): Single<User> = githubBrowserAppService
         .getUser(userName)
-        .map { userEntityMapper.mapFromRemote(it) }
+        .map { userEntityMapper.mapFrom(it) }
         .composeDomain()
 
     override fun getRepos(userName: String): Single<List<Repo>> = githubBrowserAppService
         .getRepos(userName)
-        .map { it.map { repoEntityMapper.mapFromRemote(it) } }
+        .map { it.map { repoEntityMapper.mapFrom(it) } }
         .composeDomain()
 
     override fun getRepo(userName: String, id: String): Single<Repo> = githubBrowserAppService
         .getRepo(userName, id)
-        .map { repoEntityMapper.mapFromRemote(it) }
+        .map { repoEntityMapper.mapFrom(it) }
         .composeDomain()
 
     override fun getForks(
@@ -36,6 +36,6 @@ class GithubBrowserRemoteImpl(
         id: String
     ): Single<List<Fork>> = githubBrowserAppService
         .getForks(userName, id)
-        .map { it.map { forkEntityMapper.mapFromRemote(it) } }
+        .map { it.map { forkEntityMapper.mapFrom(it) } }
         .composeDomain()
 }
